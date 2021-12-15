@@ -1,0 +1,822 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navegação da página é suave */
+html{
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+:root {
+  --header-height: 4.5rem;
+  /* colors */
+  --hue: 159;
+  /* HSL color mode */
+  --base-color: hsl(var(--hue) 36% 57%);
+  --base-color-second: hsl(var(--hue) 65% 88%);
+  --base-color-alt: hsl(var(--hue) 57% 53%);
+  --title-color: hsl(var(--hue) 41% 10%);
+  --text-color: hsl(0 0% 46%);
+  --text-color-light: hsl(0 0% 95%);
+  --body-color: hsl(0 0% 98%);
+  --subtitle-font-size: 1rem;
+  /* Fonts */
+  --title-fonts: 'Poppins', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
+  /* Paleta de profundidade das cores */
+  --background-cards: #3c3c3c;
+  --background-pagination-slides: #6e6e6e;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  font: 400 1rem var(--body-font);
+  color: var(--text-color);
+  background: var(--body-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+body,body #header,body #about, body #depoimentos, body footer, body nav.show .menu{
+  transition: 0.8s;
+}
+
+/* Há uma transição ao trocar para o tema escuro da página */
+body.trocaCorFundo,body.trocaCorFundo #header,body.trocaCorFundo #about,body.trocaCorFundo #depoimentos,body.trocaCorFundo footer,body.trocaCorFundo nav.show .menu{
+  background-color: #0c0c0c;
+}
+
+body.trocaCorFundo #header i,body.trocaCorFundo .title,body.trocaCorFundo p,body.trocaCorFundo .icon-menu,body.trocaCorFundo .logo,body.trocaCorFundo i,body.trocaCorFundo .links li a,body.trocaCorFundo #depoimentos blockquote p,body.trocaCorFundo cite,body.trocaCorFundo nav.show .toggle{
+  color: var(--text-color-light);
+}
+
+body.trocaCorFundo .section p ,body.trocaCorFundo .rows-cards blockquote p, body.trocaCorFundo .section .links ul li i,body.trocaCorFundo .section .links ul li a {
+  color: #e4e4e496;
+}
+
+body.trocaCorFundo .section .cards{
+  background: var(--background-cards);
+}
+
+body.trocaCorFundo a.logo-alt{
+  color: var(--base-color);
+}
+
+body.trocaCorFundo #depoimentos .swiper-slide{
+  background-color: var(--background-cards);
+  border-bottom: 0.15rem solid var(--base-color);
+}
+
+.title {
+  font: 700 1.875rem var(--title-fonts);
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
+}
+
+.text button {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 1rem var(--body-font);
+}
+
+.text button:hover {
+  background: var(--base-color-alt);
+  transition: 0.3s;
+}
+
+.divider-1 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 36%, 57%, 1),
+    hsla(var(--hue), 65%, 88%, 0.34)
+  );
+}
+
+.divider-2 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 65%, 88%, 0.34),
+    hsla(var(--hue), 36%, 57%, 1)
+  );
+}
+
+.container {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.section {
+  padding: calc(5rem + var(--header-height)) 0;
+}
+
+.section .title{
+  margin-bottom: 1rem;
+}
+
+.section .services-paragrafo-1{
+  font-size: var(--subtitle-font-size);
+}
+
+#header {
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 2rem;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--body-color);
+  width: 100%;
+  box-shadow: 0 1px 5px 0 lightgrey;
+}
+
+#header i{
+  cursor: pointer;
+  color: black;
+}
+
+ul{
+  list-style: none;
+}
+
+nav {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Escondendo menu no mobile */
+nav .menu{
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Criando classe show para exibir o menu mobile */
+nav.show .menu{
+  opacity: 1;
+  visibility: visible;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: var(--body-color);
+  transition: 0.3s;
+}
+
+nav.show ul.grid{
+  gap: 4rem;
+}
+
+/* Escondendo botão de fechar menu mobile */
+nav .icon-close{
+  opacity: 0;
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+  transition: 0.3s;
+}
+
+/* Quando tiver com o menu mobile aberto o ícone de fechá-lo aparece */
+nav.show .icon-close{
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
+}
+
+.toggle{
+  font-size: 1.5rem;
+  color: var(--base-color);
+  cursor: pointer;
+}
+
+nav ul li a{
+  position: relative;
+}
+
+/* Ao passar o mouse os menus ficam verde e fica com a fonte negrita, e isso acontece também quando estiver com a classe active */
+nav ul li a:hover,nav ul li a.active{
+  color: var(--base-color);
+}
+
+nav ul li a::after,nav ul li a.active::after{
+  content: '';
+  width: 0%;
+  height: 2px;
+  border-bottom: 2px solid var(--base-color);
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+  transition: width 0.4s;
+}
+
+/* Ao passar o mouse sobre o botão, a barrinha dos menus crescem em 100 % */
+nav ul li a:hover::after,nav ul li a.active::after{
+  width: 100%;
+}
+
+.logo {
+  font: 700 1.31rem var(--title-fonts);
+  color: var(--title-color);
+}
+
+.logo span {
+  color: var(--base-color);
+}
+
+.logo-alt span{
+  color: var(--text-color-light);
+}
+
+#home {
+  overflow: hidden;
+}
+
+#home .container {
+  margin: 0;
+}
+
+#home .image {
+  position: relative;
+}
+
+/* Criando um elemento fantasma para colocar um fundo na imagem */
+#home .image::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -16.8%;
+  left: 16.7%;
+  z-index: 0;
+}
+
+#home .image img {
+  position: relative;
+  right: 2.93rem;
+}
+
+#home .image img,#home .image::before {
+  border-radius: 0.25rem;
+}
+
+#home .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#home .text h1 {
+  margin-bottom: 1rem;
+}
+
+#home .text p {
+  margin-bottom: 2rem;
+}
+
+#home .text button{
+  width: 13.4rem;
+  height: 3.5rem;
+  background-color: var(--base-color);
+  border: none;
+  border-radius: 4px;
+  font: 500 1rem 'DM Sans', sans-serif;
+  cursor: pointer;
+  color: var(--text-color-light);
+}
+
+/* Section about */
+#about {
+  overflow: hidden;
+  background-color: #ffff;
+}
+
+#about .container {
+  margin: 0;
+}
+
+#about .image {
+  position: relative;
+}
+
+/* Criando um elemento fantasma para colocar um fundo na imagem */
+#about .image::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -16.8%;
+  right: 16.7%;
+  border-radius: 0.25rem;
+  z-index: 0;
+}
+
+#about .image img {
+  position: relative;
+}
+
+#about .image img,#home .image::before {
+  border-radius: 0.25rem;
+}
+
+#about .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+#about .text h1 {
+  margin-bottom: 1rem;
+}
+
+#about .text p {
+  margin-bottom: 2rem;
+}
+
+#about .text button{
+  width: 13.4rem;
+  height: 3.5rem;
+  background-color: var(--base-color);
+  border: none;
+  border-radius: 4px;
+  font: 500 1rem 'DM Sans', sans-serif;
+  cursor: pointer;
+  color: var(--text-color-light);
+}
+
+/* Seção de serviços */
+#services .services-paragrafo-1{
+  margin-bottom: 4rem;
+}
+
+.section strong{
+  color: var(--base-color);
+}
+
+/* Seção de cartões sobre serviços */
+.rows-cards.grid{
+  gap: 1.5rem;
+}
+
+.cards{
+  padding: 3.625rem 2rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  border-bottom: 0.15rem solid var(--base-color);
+  text-align: center;
+}
+
+.cards div{
+  font-size: 5rem;
+  margin-bottom: 1.65rem;
+  color: var(--base-color);
+}
+
+.card .title{
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Seção de Depoimentos */
+#depoimentos,#depoimentos .cards{
+  background-color: #ffff;
+}
+
+#depoimentos .cards{
+  position: relative;
+  margin-right: 1rem;
+}
+
+#depoimentos blockquote{
+  padding: 2rem;
+}
+
+#depoimentos blockquote p{
+  position: relative;
+  text-indent: 1.875rem;
+  margin-bottom: 1.65rem;
+  color: var(--title-color);
+}
+
+#depoimentos blockquote p span{
+  font: 700 2.5rem serif;
+  position: absolute;
+  top: -1.5rem;
+  left: -2rem;
+  color: var(--base-color);
+}
+
+/* Centralizando o nome dos usuários com suas fotos */
+#depoimentos cite{
+  display: flex;
+  align-items: center;
+  font-style: normal;
+}
+
+#depoimentos cite img{
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#depoimentos .cards i{
+  color: var(--base-color);
+  font-size: 3rem;
+  position: absolute;
+  top: 2.57rem;
+  left: 1rem;
+}
+
+#depoimentos .cards span{
+  margin: 0.5rem;
+}
+
+.container-video{
+  display: flex;
+}
+
+.videos iframe{
+  width: 23rem;
+  height: 20rem;
+  margin-right: 1rem;
+}
+
+/* Botões para navegação dos slides de Depoimentos */
+.buttons-cards{
+  display: flex;
+  justify-content: center;
+}
+
+.buttons-cards span{
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+}
+
+.buttons-cards span:first-child{
+  background-color: var(--base-color);
+}
+
+.buttons-cards span{
+  background-color: #E4E4E4;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* Swiper */
+.swiper-container{
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+}
+
+.swiper-slide{
+  border: none;
+  padding: 4rem 1rem;
+  border-radius: 0.3rem;
+}
+
+.swiper-pagination-bullet{
+  background-color: var(--background-pagination-slides);
+}
+
+.swiper-pagination-bullet-active{
+  background-color: var(--base-color);
+}
+
+/* Seção de contatos */
+#contact button{
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  border: none;
+  cursor: pointer;
+}
+
+#contact button i{
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+}
+
+#contact ul.grid{
+  gap: 2rem;
+}
+
+.links li a{
+  display: flex;
+  align-items: center;
+}
+
+.links li a{
+  color: var(--text-color);
+}
+
+.icons-contato{
+  font-size: 1.25rem;
+  color: var(--base-color);
+  margin-right: 0.875rem;
+}
+
+footer{
+  background-color: var(--base-color);
+}
+
+footer.section{
+  padding: 4rem 0;
+}
+
+footer .brand p{
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+/* Adaptando a caixa ao conteúdo filho */
+footer .social{
+  grid-auto-flow: column;
+  width: fit-content;
+}
+
+footer .social i{
+  display: inline-block;
+  color: var(--text-color-light);
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+}
+
+footer .logo{
+  display: inline-block;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Voltar ao topo da página */
+.voltar-topo{
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.5rem;
+  clip-path: circle();
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  font-size: 1rem;
+  line-height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  transform: translateY(100%);
+}
+
+/* Criando classe show para exibir botão de voltar do topo */
+.voltar-topo.show{
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Media queries */
+/* Dispositivos muito largos: 1200px (Desktops)*/
+@media (min-width: 1200px){
+  /* Navegação */
+  .container{
+    max-width: 70rem;
+    margin: 0 auto;
+  }
+
+  .toggle{
+    display: none;
+  }
+  
+  nav .menu ul{
+    display: flex;
+  }
+
+  nav .menu ul li a{
+    font: normal 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav .menu ul li a.active{
+    font-weight: bold;
+    transition: 0.4s;
+  }
+
+  /* Container de todas as seções */
+  main {
+    margin-top: var(--header-height);
+  }
+
+  .section{
+    padding: 10rem 0;
+  }
+
+  /* Seção home */
+  #home .container{
+    grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  #home .image{
+    order: 1;
+  }
+
+  /* O texto aparece primeiro do quê a imagem */
+  #home .text{
+    order: 0;
+    max-width: 24.75rem;
+    text-align: left;
+  }
+
+  #home .text button{
+    height: 3.125rem;
+  }
+
+  /* Seção sobre */
+  #about .container{
+    grid-auto-flow: column;
+    margin: 0 auto;
+  }
+
+  /* Seção serviços */
+  .section header{
+    max-width: 32.70rem;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  #depoimentos .container{
+    margin: 0 auto;
+  }
+  
+  .rows-cards{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  /* Seção de contatos */
+  #contact .container{
+    grid-auto-flow: column;
+    align-items: center;
+  } 
+
+  #contact .text{
+    max-width: 25rem;
+  }
+
+  /* Rodapé */
+  footer.section{
+    padding: 3.75rem 0;
+  }
+
+  footer .brand{
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer .logo{
+    font-size: 2.25rem;
+  }
+}
+
+/* Dispositivos largos: 1023px */
+@media(min-width: 1023px){
+  .toggle{
+    display: none;
+  }
+
+  .menu{
+    visibility: hidden;
+  }
+
+  .swiper-pagination{
+    position: absolute;
+    top: 105%;
+  }
+
+  nav .logo{
+    margin-right: 15rem;
+  }
+}
+
+/* Dispositivos largos: 992px */
+@media (min-width: 992px) {
+  :root{
+    --title-font-size: 2.25rem;
+    --subtitle-font-size: 1.5rem;
+    --paragraph-section: 1.2rem;
+  }
+
+  nav .logo{
+    margin-right: 15rem;
+  }
+
+  nav .menu{
+    opacity: 1;
+    visibility: visible;
+  }
+
+  nav .menu ul{
+    display: flex;
+  }
+
+  nav .menu ul li a{
+    font: normal 1rem var(--body-font);
+  }
+
+  nav .menu ul li a.active{
+    font-weight: bold;
+  }
+
+  main{
+    margin-top: var(--header-height);
+  }
+
+  .section .services-paragrafo-1{
+    font-size: var(--paragraph-section);
+  }
+
+  .cards .title{
+    font-size: var(--subtitle-font-size);
+  }
+
+  .rows-cards{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  #depoimentos .title{
+    text-align: center;
+  }
+
+  .toggle{
+    display: none;
+  }
+}
+
+/* Dispositivos médios: 767px (Tablets) */
+@media(min-width: 767px){
+  :root{
+    --subtitle-sections-font-size4: 1.5rem;
+    --subtitle-font-size4: 1.5rem;
+    --fonts-menus: 1rem;
+  }
+
+  nav .logo{
+    margin-right: 15rem;
+  }
+
+  nav .menu ul li a.active{
+    font-weight: bold;
+  }
+
+  .section .title{
+    font-size: var(--subtitle-sections-font-size4);
+  }
+
+  .cards .title{
+    font-size: var(--subtitle-font-size4);
+  }
+
+  .swiper-pagination{
+    position: absolute;
+    top: 105%;
+  }
+
+  .cards{
+    padding: 3.625rem 2rem;
+  }
+
+  #depoimentos blockquote p {
+    text-align: start;
+    padding-left: 5px;
+  }
+
+  .toggle{
+    visibility: visible;
+  }
+}
